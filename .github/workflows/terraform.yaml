@@ -9,20 +9,22 @@ jobs:
     terraform:
         runs-on: ubuntu-latest
         steps:
+            - name: Grant IAM
+              run: |
+                gcloud iam service-accounts add-iam-policy-binding "github@terra-55091.iam.gserviceaccount.com" --project="terra-55091" --role="roles/iam.workloadIdentityUser" --member="principalSet://iam.googleapis.com/projects/1090358368731/locations/global/workloadIdentityPools/github-actions-sa/attribute.repository/Shankar-Kanni
+            # - name: Checkout the repo
+            #   uses: actions/checkout@v4
 
-            - name: Checkout the repo
-              uses: actions/checkout@v4
+            # - name: Terraform setup
+            #   uses: hashicorp/setup-terraform@v3
 
-            - name: Terraform setup
-              uses: hashicorp/setup-terraform@v3
+            # - name: Terraform fmt
+            #   run: terraform fmt
+            # - name: Terraform Init
+            #   run: terraform init
 
-            - name: Terraform fmt
-              run: terraform fmt
-            - name: Terraform Init
-              run: terraform init
+            # - name: Terraform plan
+            #   run: terraform plan
 
-            - name: Terraform plan
-              run: terraform plan
-
-            - name: Terraform apply
-              run: terraform apply -auto-approve
+            # - name: Terraform apply
+            #   run: terraform apply -auto-approve
